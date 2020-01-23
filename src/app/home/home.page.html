@@ -1,14 +1,86 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="tertiary" >
     <ion-title>
-      Ionic Blank
+      Visitor registration
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <div class="ion-padding">
-    The world is your oyster.
-    <p>If you get lost, the <a target="_blank" rel="noopener" href="https://ionicframework.com/docs/">docs</a> will be your guide.</p>
+  <div class="ion-padding ion-text-center">
+    <ion-button color="tertiary" (click)="scanQR()">
+      <ion-icon name="qr-scanner" slot="start"></ion-icon>QR SCAN AADHAR CARD</ion-button>
   </div>
+
+  <br>
+
+
+  <ion-grid *ngIf="isShowHide" >
+    <ion-row>
+      <ion-col size="3">UID</ion-col>
+      <ion-col size="1">:</ion-col>
+      <ion-col size="8">{{xmlToJson.PrintLetterBarcodeData.$.uid}}</ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col size="3">Name</ion-col>
+      <ion-col size="1">:</ion-col>
+      <ion-col size="8">{{xmlToJson.PrintLetterBarcodeData.$.name}}</ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col size="3">Gender</ion-col>
+      <ion-col size="1">:</ion-col>
+      <ion-col size="8">{{xmlToJson.PrintLetterBarcodeData.$.gender}}</ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col size="3">YOB</ion-col>
+      <ion-col size="1">:</ion-col>
+      <ion-col size="8">{{xmlToJson.PrintLetterBarcodeData.$.yob}}</ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col size="3">CO</ion-col>
+      <ion-col size="1">:</ion-col>
+      <ion-col size="8">{{xmlToJson.PrintLetterBarcodeData.$.co}}</ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col size="3">House</ion-col>
+      <ion-col size="1">:</ion-col>
+      <ion-col size="8">{{xmlToJson.PrintLetterBarcodeData.$.house}}</ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col size="3">Street</ion-col>
+      <ion-col size="1">:</ion-col>
+      <ion-col size="8">{{xmlToJson.PrintLetterBarcodeData.$.street}}</ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col size="3">dist</ion-col>
+      <ion-col size="1">:</ion-col>
+      <ion-col size="8">{{xmlToJson.PrintLetterBarcodeData.$.dist}}</ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col size="3">State</ion-col>
+      <ion-col size="1">:</ion-col>
+      <ion-col size="8">{{xmlToJson.PrintLetterBarcodeData.$.state}}</ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col size="3">Pincode</ion-col>
+      <ion-col size="1">:</ion-col>
+      <ion-col size="8">{{xmlToJson.PrintLetterBarcodeData.$.pc}}</ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col size="3">dob</ion-col>
+      <ion-col size="1">:</ion-col>
+      <ion-col size="8">{{xmlToJson.PrintLetterBarcodeData.$.dob}}</ion-col>
+    </ion-row>
+  </ion-grid>
+
 </ion-content>
