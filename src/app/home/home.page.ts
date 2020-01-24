@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
+import { BarcodeScanner, BarcodeScannerOptions } from '@ionic-native/barcode-scanner/ngx';
 import xml2js from 'xml2js';
+import { ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-home',
@@ -11,19 +12,49 @@ export class HomePage {
 
   public xmlToJson;
   public isShowHide:boolean = false;
-  constructor(private barcodeScanner: BarcodeScanner) { }
+  constructor(
+        private barcodeScanner: BarcodeScanner,
+        private toastCtrl: ToastController,
+        ) { }
 
 
   scanQR() {
     
+    const options: BarcodeScannerOptions = {
+      preferFrontCamera: false,
+      showFlipCameraButton: true,
+      showTorchButton: true,
+      torchOn: false,
+      prompt: 'Place a barcode inside the scan area',
+      resultDisplayDuration: 500,
+      disableSuccessBeep: false
+      // formats: 'QR_CODE,PDF_417 ',
+      // orientation: 'landscape',
+    };
+
     // Optionally request the permission early
-    this.barcodeScanner.scan().then(barcodeData => {
-      this.convertToJson(barcodeData.text);
-      console.log('Barcode data', barcodeData);
+    this.barcodeScanner.scan(options).then(barcodeData => {
+      
+      if (barcodeData.cancelled) {
+        this.isShowHide = false;
+         this.presentToast('Cancelled Scanning ☹️...');
+      }else {
+        this.isShowHide = true;
+        this.convertToJson(barcodeData.text);
+      }
+
      }).catch(err => {
         alert(JSON.stringify(err));
          console.log('Error', err);
      });
+  }
+
+  async presentToast(msg: string) {
+    const toast = await this.toastCtrl.create({
+      message: msg,
+      duration: 2000
+    });
+    toast.present();
   }
 
   convertToJson(data: string): Object {
